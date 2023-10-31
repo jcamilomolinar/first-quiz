@@ -33,6 +33,8 @@ def get_city_weather(city):
      sky_condition = "rainy"
   elif city == "Quito":
      sky_condition = "sunny"
+  elif city == "San Francisco":
+     sky_condition = "windy"
 
   temperature = get_city_temperature(city)
 
