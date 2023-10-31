@@ -24,7 +24,7 @@ import pets_db
 
 sql_pets_owned_by_nobody = """
 
-Your SQL here.
+SELECT name, species, age FROM animals LEFT JOIN people_animals ON animals.animal_id = people_animals.pet_id WHERE owner_id IS NULL;
 
 """
 
@@ -34,7 +34,10 @@ Your SQL here.
 
 sql_pets_older_than_owner = """
 
-Your SQL here.
+SELECT COUNT(*) FROM animals 
+JOIN people_animals ON animals.animal_id = people_animals.pet_id 
+JOIN people ON people_animals.owner_id = people.person_id 
+WHERE animals.age > people.age;
 
 """
 
@@ -43,6 +46,14 @@ Your SQL here.
 # The output should be a list of tuples in the format: (<person name>, <pet name>, <species>)
 sql_only_owned_by_bessie = """ 
 
-Your SQL here.
+SELECT people.name, animals.name, species FROM animals 
+JOIN people_animals ON animals.animal_id = people_animals.pet_id 
+JOIN people ON people_animals.owner_id = people.person_id
+WHERE people.name = "bessie" AND NOT EXISTS (
+	SELECT 1 FROM animals a
+	JOIN people_animals ON animals.animal_id = people_animals.pet_id 
+	JOIN people p ON people_animals.owner_id = p.person_id
+	WHERE p.name != "bessie" and animals.name = a.name
+);
 
 """
