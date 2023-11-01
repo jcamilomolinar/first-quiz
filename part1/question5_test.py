@@ -72,3 +72,12 @@ def test_select_all_vegetarian_pets():
   assert rows[1] == ('martin', 'spinach')
   assert rows[2] == ('ricky', 'cough drops')
   assert rows[3] == ('shannon', 'turnips')
+
+def tests_question5():
+  test_create_favorite_foods()
+  test_alter_tables_with_favorite_food()
+  test_select_all_vegetarian_pets()
+  print("All tests passed!")
+
+if __name__ == "__main__":
+  tests_question5()
